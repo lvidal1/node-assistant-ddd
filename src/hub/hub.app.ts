@@ -1,3 +1,3 @@
-import hubRoute from './insfrastructure/route/hub.route'
+import hubRoute from './infrastructure/route/hub.route'
 
 export { hubRoute }
