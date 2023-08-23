@@ -2,7 +2,7 @@ import express, { Application } from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
 import compression from 'compression'
-import userRoute from './infrastructure/route/user.route'
+import { hubRoute } from './hub/hub.app'
 
 class App {
     public app: Application
@@ -24,7 +24,7 @@ class App {
     }
 
     private routes() {
-        this.app.use('/', userRoute)
+        this.app.use('/', hubRoute)
     }
 
     public listen() {

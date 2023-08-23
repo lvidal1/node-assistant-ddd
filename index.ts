@@ -1,8 +1,8 @@
-import dotenv from "dotenv";
-import UserApp from "./source/user/user.app"
+import dotenv from 'dotenv'
+import App from './src/app'
 
-dotenv.config();
+dotenv.config()
 
-const app = new UserApp(parseInt(process.env.PORT || "8000"));
+const app = new App(parseInt(process.env.PORT || '8000'))
 
-app.listen();
+app.listen()
