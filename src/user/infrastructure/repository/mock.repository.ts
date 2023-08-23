@@ -1,6 +1,5 @@
 import { UserEntity } from '../../domain/user.entity'
 import { UserRepository } from '../../domain/user.repository'
-import UserModel from '../models/user.schema'
 
 const MOCK_USER = {
     name: 'Leo',
@@ -10,15 +9,15 @@ const MOCK_USER = {
 }
 
 export class MockRepository implements UserRepository {
-    async findUserByEmail(email: string): Promise<UserEntity | null> {
+    async findUserByEmail(): Promise<UserEntity | null> {
         const user = MOCK_USER
         return user
     }
-    async findUserById(uuid: string): Promise<UserEntity | null> {
+    async findUserById(): Promise<UserEntity | null> {
         const user = MOCK_USER
         return user
     }
-    async registerUser(userIn: UserEntity): Promise<UserEntity | null> {
+    async registerUser(): Promise<UserEntity | null> {
         const user = MOCK_USER
         return user
     }

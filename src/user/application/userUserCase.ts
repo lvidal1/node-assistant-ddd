@@ -18,7 +18,7 @@ export class UserUseCase {
         email: string
         description: string
     }) {
-        const userValue = new UserValue({ name, email })
+        const userValue = new UserValue({ name, email, description })
         const userCreated = await this.userRepository.registerUser(userValue)
         return userCreated
     }

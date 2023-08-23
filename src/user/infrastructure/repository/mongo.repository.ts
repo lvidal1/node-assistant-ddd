@@ -3,7 +3,7 @@ import { UserRepository } from '../../domain/user.repository'
 import UserModel from '../models/user.schema'
 
 export class MongoRepository implements UserRepository {
-    async findUserByEmail(email: string): Promise<UserEntity | null> {
+    async findUserByEmail(): Promise<UserEntity | null> {
         throw new Error('Method not implemented.')
     }
     async findUserById(uuid: string): Promise<any> {
