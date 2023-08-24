@@ -1,5 +1,5 @@
+import { HubController } from '@/hub/infrastructure/controller/hub.controller'
 import { Router } from 'express'
-import { HubController } from '../controller/hub.controller'
 
 const hubRoute = Router()
 
