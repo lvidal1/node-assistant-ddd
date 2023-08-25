@@ -1,38 +1,50 @@
 import express, { Application } from 'express'
+import { Server } from 'http'
+// Middlewares
 import cors from 'cors'
 import morgan from 'morgan'
 import compression from 'compression'
-import { hubRoute } from './hub/hub.app'
+// IOC
+import 'reflect-metadata'
+import { Container } from 'inversify'
+import { InversifyExpressServer } from 'inversify-express-utils'
+// Container
+import hubContainer from './hub/hub.app'
 
 class App {
-    public app: Application
-    public port: number
+    private readonly _container: Container
+    public _port: number
 
-    constructor(port: number) {
-        this.app = express()
-        this.port = port
-
-        this.middleware()
-        this.routes()
+    constructor(container: Container, port: number) {
+        this._container = container
+        this._port = port
+        this.modules()
     }
 
-    private middleware() {
-        this.app.use(express.json())
-        this.app.use(cors())
-        this.app.use(morgan('dev'))
-        this.app.use(compression())
-    }
-
-    private routes() {
-        this.app.use('/', hubRoute)
-    }
-
-    public listen() {
-        this.app.listen(this.port, () => {
-            console.log(
-                `⚡️[server]: Server is running at http://localhost:${this.port}`
-            )
+    public start(): Server {
+        const server = new InversifyExpressServer(this._container, null, {
+            rootPath: '/',
         })
+
+        return server
+            .setConfig((app) => this.middlewares(app))
+            .build()
+            .listen(this._port, () => {
+                console.log(
+                    `⚡️[server]: Server is running at http://localhost:${this._port}`
+                )
+            })
+    }
+
+    private middlewares(app: Application) {
+        app.use(express.json())
+        app.use(cors())
+        app.use(morgan('dev'))
+        app.use(compression())
+    }
+
+    private modules(): void {
+        hubContainer.load(this._container)
     }
 }
 

@@ -1,15 +1,17 @@
 import { Request, Response } from 'express'
-import operationAdapter from '../../../adapters/operation.adapter'
+import { controller, httpGet } from 'inversify-express-utils'
 
+@controller('/')
 export class HubController {
     constructor() {}
 
-    public welcome = (req: Request, res: Response) => {
+    @httpGet('/')
+    welcome(req: Request, res: Response) {
         res.send({ message: 'Welcome to the hub' })
     }
 
-    public askQuestion = (req: Request, res: Response) => {
-        const answer = operationAdapter.askQuestion()
-        res.send({ message: answer })
+    @httpGet('ask')
+    askQuestion(req: Request, res: Response) {
+        res.send({ message: 'Ask' })
     }
 }

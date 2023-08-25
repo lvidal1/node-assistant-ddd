@@ -1,3 +1,18 @@
-import hubRoute from '@/hub/infrastructure/route/hub.route'
+import { application } from '@/hub/application/_ioc'
+import { infrastructure } from '@/hub/infrastructure/_ioc'
+import * as route from '@/hub/infrastructure/route'
+import { Container, ContainerModule } from 'inversify'
 
-export { hubRoute }
+const hubContainer = {
+    load: (container: Container) => {
+        const containers = new ContainerModule((bind) => {
+            application(bind)
+            infrastructure(bind)
+        })
+
+        return container.load(containers)
+    },
+    route,
+}
+
+export default hubContainer

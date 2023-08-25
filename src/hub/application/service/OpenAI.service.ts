@@ -1,6 +1,8 @@
-import { LLMService } from '@/hub/domain/LLM.service'
+import LLMService from '@/hub/domain/LLM.service'
+import { injectable } from 'inversify'
 import OpenAI from 'openai'
 
+@injectable()
 export class OpenAIService implements LLMService {
     client
 
