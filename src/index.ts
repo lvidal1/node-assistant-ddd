@@ -1,9 +1,8 @@
+import 'reflect-metadata'
 import dotenv from 'dotenv'
-import { replaceTscAliasPaths } from 'tsc-alias'
 import App from './app'
 import { Container } from 'inversify'
 ;(function main() {
-    replaceTscAliasPaths()
     dotenv.config()
 
     const container = new Container()

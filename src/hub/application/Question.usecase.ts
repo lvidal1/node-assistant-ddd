@@ -1,6 +1,11 @@
-import { APPLICATION_TYPES } from '@/hub/application/_ioc'
+import { APPLICATION_TYPES } from './_ioc'
 import LLMService from '@/hub/domain/LLM.service'
 import { inject, injectable } from 'inversify'
+
+// export const APPLICATION_TYPES = {
+//     OpenAIService: Symbol.for('OpenAIService'),
+//     QuestionUseCase: Symbol.for('QuestionUseCase'),
+// }
 
 @injectable()
 export default class QuestionUseCase {
